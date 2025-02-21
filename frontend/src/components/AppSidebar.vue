@@ -196,7 +196,7 @@ const addQuizzes = () => {
 const addAssignments = () => {
 	if (isInstructor.value || isModerator.value) {
 		sidebarLinks.value.push({
-			label: 'Assignments',
+			label: 'Assignments testting',
 			icon: 'Pencil',
 			to: 'Assignments',
 			activeFor: ['Assignments', 'AssignmentForm'],
