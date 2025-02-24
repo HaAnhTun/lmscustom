@@ -63,6 +63,11 @@ const routes = [
 		component: () => import('@/pages/Statistics.vue'),
 	},
 	{
+		path: '/testing',
+		name: 'Testing',
+		component: () => import('@/pages/Testing.vue'),
+	},
+	{
 		path: '/user/:username',
 		name: 'Profile',
 		component: () => import('@/pages/Profile.vue'),

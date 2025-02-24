@@ -196,10 +196,21 @@ const addQuizzes = () => {
 const addAssignments = () => {
 	if (isInstructor.value || isModerator.value) {
 		sidebarLinks.value.push({
-			label: 'Assignments testting 2 22 2 2',
+			label: 'Assignments',
 			icon: 'Pencil',
 			to: 'Assignments',
 			activeFor: ['Assignments', 'AssignmentForm'],
+		})
+	}
+}
+
+const addTesting = () => {
+	if (isInstructor.value || isModerator.value) {
+		sidebarLinks.value.push({
+			label: 'Testing',
+			icon: 'Pencil',
+			to: 'Testing',
+			activeFor: ['Testing'],
 		})
 	}
 }
@@ -269,6 +280,7 @@ watch(userResource, () => {
 		addPrograms()
 		addQuizzes()
 		addAssignments()
+		addTesting()
 	}
 })
 
