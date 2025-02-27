@@ -224,6 +224,23 @@ def get_instructors(course):
 		)
 	return instructor_details
 
+def get_requested_departments(course):
+	requested_departments_details = []
+	requested_departments = frappe.get_all(
+		"Course RequestDepartment", {"parent": course}, order_by="idx", pluck="requested_department"
+	)
+
+	for requested_department in requested_departments:
+		requested_departments_details.append(
+			frappe.db.get_value(
+				"Department",
+				requested_department,
+				["department_name", "department_code"],
+				as_dict=True,
+			)
+		)
+	return requested_departments_details
+
 
 def get_students(course, batch=None):
 	"""Returns (email, full_name, username) of all the students of this batch as a list of dict."""
@@ -1012,6 +1029,7 @@ def get_course_details(course):
 	course_details.tags = course_details.tags.split(",") if course_details.tags else []
 
 	course_details.instructors = get_instructors(course_details.name)
+	course_details.requested_departments = get_requested_departments(course_details.name)
 	# course_details.is_instructor = is_instructor(course_details.name)
 	if course_details.paid_course:
 		"""course_details.course_price, course_details.currency = check_multicurrency(

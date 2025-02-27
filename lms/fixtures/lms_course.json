@@ -1,0 +1,205 @@
+[
+ {
+  "amount_usd": 0.0,
+  "category": "",
+  "chapters": [],
+  "course_price": 0.0,
+  "currency": "",
+  "description": "<p>Khóa học tiếng Nhật N5 <br>nâng cao trình độ tiếng Nhật</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/makima.jpg",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-02-27 10:42:45.401706",
+  "name": "jpn5",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-26",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "DEV DN"
+   }
+  ],
+  "short_introduction": "Khóa học tiếng Nhật N5",
+  "status": "Approved",
+  "tags": "",
+  "title": "JPN5",
+  "upcoming": 0,
+  "video_link": ""
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "",
+  "chapters": [],
+  "course_price": 0.0,
+  "currency": "",
+  "description": "<p>321312 test</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/makima.jpg",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-02-27 10:42:33.156569",
+  "name": "jpn5-2",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-26",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "dev8"
+   }
+  ],
+  "short_introduction": "Khóa học tiếng Nhật N5",
+  "status": "Approved",
+  "tags": "",
+  "title": "JPN5",
+  "upcoming": 0,
+  "video_link": ""
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "",
+  "chapters": [],
+  "course_price": 0.0,
+  "currency": "",
+  "description": "<p>4234</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/makima.jpg",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   },
+   {
+    "instructor": "Guest"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-02-27 10:41:55.398636",
+  "name": "jpn53",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-26",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "DEV DN"
+   }
+  ],
+  "short_introduction": "Khóa học tiếng Nhật N5",
+  "status": "Approved",
+  "tags": "",
+  "title": "JPN53",
+  "upcoming": 0,
+  "video_link": ""
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "Business",
+  "chapters": [],
+  "course_price": 0.0,
+  "currency": "",
+  "description": "<p>3213</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/makima.jpg",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-02-27 10:41:44.735973",
+  "name": "watch",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-26",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "REQDEV-00002"
+   }
+  ],
+  "short_introduction": "3213",
+  "status": "Approved",
+  "tags": "",
+  "title": "Watch",
+  "upcoming": 0,
+  "video_link": ""
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "",
+  "chapters": [],
+  "course_price": 0.0,
+  "currency": "",
+  "description": "<p>2132</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/image.png",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-02-27 10:42:06.071481",
+  "name": "watch-2",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-27",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "DEV DN"
+   }
+  ],
+  "short_introduction": "123",
+  "status": "Approved",
+  "tags": "",
+  "title": "Watch2",
+  "upcoming": 0,
+  "video_link": "321"
+ }
+]

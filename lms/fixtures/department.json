@@ -1,0 +1,58 @@
+[
+ {
+  "department_code": "REQDEV-00001",
+  "department_name": "DEV 1",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 13:53:22.605547",
+  "name": "REQDEV-00001"
+ },
+ {
+  "department_code": "REQDEV-00003",
+  "department_name": "dev3",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 13:53:57.656145",
+  "name": "REQDEV-00003"
+ },
+ {
+  "department_code": "REQDEV-00004",
+  "department_name": "dev 5",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 13:54:10.881675",
+  "name": "REQDEV-00004"
+ },
+ {
+  "department_code": "dev8",
+  "department_name": "DEV8",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 14:30:26.153670",
+  "name": "dev8"
+ },
+ {
+  "department_code": "REQDEV-00002",
+  "department_name": "dev 2",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 13:53:42.453806",
+  "name": "REQDEV-00002"
+ },
+ {
+  "department_code": "DEV DN",
+  "department_name": "DEV ĐN",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 14:29:55.280210",
+  "name": "DEV DN"
+ },
+ {
+  "department_code": "DEV6",
+  "department_name": "DEV 6",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 13:54:26.594071",
+  "name": "DEV6"
+ }
+]
