@@ -107,8 +107,8 @@
 						</div>
 						<div class="mb-4">
 							<FormControl type="autocomplete" :options="instructor_types.data" size="sm" variant="subtle"
-								placeholder="Placeholder" :disabled="false" label="Instructor Type"
-								v-model="course.instructor_type" />
+								:disabled="false" label="Instructor Type" 
+								v-model="selected_instructor_types" />
 						</div>
 						<div class="mb-4">
 							<MultiSelect v-model="reqDepartments" doctype="Department"
@@ -144,6 +144,7 @@
 					<div class="container border-t">
 						<div class="text-lg font-semibold mt-5 mb-4">
 							{{ __('Pricing') }}
+							{{ instructor_types.data }}
 						</div>
 						<div class="mb-4">
 							<FormControl type="checkbox" v-model="course.paid_course" :label="__('Paid Course')" />
@@ -205,6 +206,16 @@ const props = defineProps({
 	},
 })
 
+
+const instructor_types = createResource({
+	url: 'lms.lms.utils.get_field_options',
+	params: {
+		doctype: "LMS Course",
+		fieldname: "instructor_type"
+	},
+	auto: true
+})
+
 const course = reactive({
 	title: '',
 	short_introduction: '',
@@ -227,6 +238,10 @@ const course = reactive({
 	instructor_type: '',
 })
 
+const selected_instructor_types = ref({ label: '' , value: '' })
+watch(selected_instructor_types, (newVal) => {
+	course.instructor_type = newVal.value
+})
 onMounted(() => {
 	if (
 		props.courseName == 'new' &&
@@ -320,6 +335,9 @@ const courseResource = createResource({
 				data.requested_departments.forEach((requested_department) => {
 					reqDepartments.value.push(requested_department.requested_department)
 				})
+			} else if (key == 'instructor_type') {
+				selected_instructor_types.label = data.instructor_type;
+				selected_instructor_types.value = data.instructor_type;
 			} else if (Object.hasOwn(course, key)) course[key] = data[key]
 		})
 		let checkboxes = [
@@ -334,6 +352,7 @@ const courseResource = createResource({
 			let key = checkboxes[idx]
 			course[key] = course[key] ? true : false
 		}
+		
 
 		if (data.image) imageResource.reload({ image: data.image })
 		check_permission()
@@ -387,6 +406,8 @@ const submitCourse = () => {
 		})
 	}
 }
+
+
 
 const deleteCourse = createResource({
 	url: 'lms.lms.api.delete_course',
@@ -508,14 +529,7 @@ const pageMeta = computed(() => {
 	}
 })
 
-let instructor_types = createResource({
-	url: 'lms.lms.utils.get_field_options',
-	params: {
-		"doctype": "LMS Course",
-		"fieldname": "instructor_type"
-	},
-	auto: true,
-})
+
 
 updateDocumentTitle(pageMeta)
 </script>

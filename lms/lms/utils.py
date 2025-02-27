@@ -1996,7 +1996,7 @@ def get_field_options(doctype, fieldname):
 		
     if field.fieldtype == "Select" and field.options:
         options = field.options.split("\n")
-        options_list = [{"label": opt, "value": opt} for opt in options]
+        options_list = [{'label': opt, 'value': opt} for opt in options]
         return options_list
     else:
         frappe.throw(_("Trường '{0}' không phải là kiểu Select hoặc không có tùy chọn").format(fieldname))
