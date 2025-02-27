@@ -106,12 +106,9 @@
 								:filters="{ ignore_user_type: 1 }" :required="true" />
 						</div>
 						<div class="mb-4">
-							<label class="block" :class="text-xs" >
-								{{__('Instructor Type') }}
-							</label>
-							<Autocomplete v-model="course.instructor_type"
-								:options="instructor_types" ref="autocomplete" :size="sm">
-							</Autocomplete>
+							<FormControl type="autocomplete" :options="instructor_types.data" size="sm" variant="subtle"
+								placeholder="Placeholder" :disabled="false" label="Instructor Type"
+								v-model="course.instructor_type" />
 						</div>
 						<div class="mb-4">
 							<MultiSelect v-model="reqDepartments" doctype="Department"
@@ -519,6 +516,6 @@ let instructor_types = createResource({
 	},
 	auto: true,
 })
-console.log(instructor_types.data)
+
 updateDocumentTitle(pageMeta)
 </script>
