@@ -103,11 +103,20 @@
 						</div>
 						<div class="mb-4">
 							<MultiSelect v-model="instructors" doctype="User" :label="__('Instructors')"
-							:filters="{ ignore_user_type: 1 }" :required="true" />
+								:filters="{ ignore_user_type: 1 }" :required="true" />
 						</div>
 						<div class="mb-4">
-						<MultiSelect v-model="reqDepartments" doctype="Department"
-							:label="__('Requested Departments')" :required="true" />
+							<label class="block" :class="sm" >
+								{{__('Instructor Type') }}
+							</label>
+							<Autocomplete v-model="course.instructor_type" :label="__('Instructor Type')"
+								:options="instructor_types.data" ref="autocomplete" :size="sm"
+								:filterable="false">
+							</Autocomplete>
+						</div>
+						<div class="mb-4">
+							<MultiSelect v-model="reqDepartments" doctype="Department"
+								:label="__('Requested Departments')" :required="true" />
 						</div>
 					</div>
 					<div class="container border-t">
@@ -118,6 +127,10 @@
 							<div v-if="user.data?.is_moderator" class="flex flex-col space-y-4">
 								<FormControl type="checkbox" v-model="course.published" :label="__('Published')" />
 								<FormControl v-model="course.published_on" :label="__('Published On')" type="date"
+									class="mb-5" />
+								<FormControl v-model="course.start_date" :label="__('Start Date')" type="date"
+									class="mb-5" />
+								<FormControl v-model="course.end_date" :label="__('End Date')" type="date"
 									class="mb-5" />
 							</div>
 							<div class="flex flex-col space-y-3">
@@ -173,6 +186,7 @@ import {
 } from 'vue'
 import { showToast, updateDocumentTitle } from '@/utils'
 import Link from '@/components/Controls/Link.vue'
+import Autocomplete from '@/components/Controls/Autocomplete.vue'
 import { Image, Trash2, X } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 import CourseOutline from '@/components/CourseOutline.vue'
@@ -212,6 +226,9 @@ const course = reactive({
 	paid_course: false,
 	course_price: '',
 	currency: '',
+	start_date: '',
+	end_date: '',
+	instructor_type: '',
 })
 
 onMounted(() => {
@@ -493,6 +510,15 @@ const pageMeta = computed(() => {
 		title: 'Create a Course',
 		description: 'Create or edit a course for your learning system.',
 	}
+})
+
+let instructor_types = createResource({
+	url: 'lms.lms.utils.get_field_options',
+	params: {
+		"doctype": "LMS Course",
+		"fieldname": "instructor_type"
+	},
+	auto: true,
 })
 
 updateDocumentTitle(pageMeta)

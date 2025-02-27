@@ -1978,3 +1978,26 @@ def get_batch_card_details(batches):
 			batch.price = fmt_money(batch.amount, 0, batch.currency)
 
 	return batches
+
+import frappe
+from frappe import _
+
+@frappe.whitelist()
+def get_field_options(doctype, fieldname):
+    # Lấy metadata của DocType
+    meta = frappe.get_meta(doctype)
+    if not meta:
+        frappe.throw(_("DocType '{0}' không tồn tại").format(doctype))
+
+    # Tìm field với fieldname cụ thể
+    field = next((f for f in meta.fields if f.fieldname == fieldname), None)
+    if not field:
+        frappe.throw(_("Trường '{0}' không tồn tại trong DocType '{1}'").format(fieldname, doctype))
+		
+    if field.fieldtype == "Select" and field.options:
+        options = field.options.split("\n")
+        options_list = [{"label": opt, "value": opt} for opt in options]
+        return options_list
+    else:
+        frappe.throw(_("Trường '{0}' không phải là kiểu Select hoặc không có tùy chọn").format(fieldname))
+

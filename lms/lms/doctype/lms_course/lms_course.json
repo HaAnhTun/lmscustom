@@ -54,7 +54,11 @@
   "enrollments",
   "lessons",
   "rating",
-  "requested_departments"
+  "requested_departments",
+  "instructor_type",
+  "course_type",
+  "start_date",
+  "end_date"
  ],
  "fields": [
   {
@@ -294,6 +298,47 @@
    "label": "Requested Departments",
    "options": "Course RequestDepartment",
    "reqd": 1
+  },
+  {
+   "default": "N\u1ed9i b\u1ed9",
+   "fieldname": "instructor_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Instructor Type",
+   "options": "Thu\u00ea ngo\u00e0i\nN\u1ed9i b\u1ed9",
+   "sticky": 1
+  },
+  {
+   "default": "Online",
+   "fieldname": "course_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Course Type",
+   "options": "Online\nOffline\nBlended"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "End Date"
   }
  ],
  "is_published_field": "published",
@@ -320,7 +365,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2025-02-26 14:39:52.417126",
+ "modified": "2025-02-27 14:57:50.788525",
  "modified_by": "Administrator",
  "module": "LMS",
  "name": "LMS Course",
