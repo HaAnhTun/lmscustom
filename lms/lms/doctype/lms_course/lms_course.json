@@ -58,7 +58,8 @@
   "instructor_type",
   "course_type",
   "start_date",
-  "end_date"
+  "end_date",
+  "training_objective"
  ],
  "fields": [
   {
@@ -339,6 +340,16 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "End Date"
+  },
+  {
+   "fieldname": "training_objective",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Training Objective"
   }
  ],
  "is_published_field": "published",
@@ -365,7 +376,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2025-02-27 14:57:50.788525",
+ "modified": "2025-02-28 15:40:20.919996",
  "modified_by": "Administrator",
  "module": "LMS",
  "name": "LMS Course",

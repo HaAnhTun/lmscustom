@@ -1,69 +1,81 @@
 <template>
 	<div v-if="courses.data">
-		<header
-			class="sticky top-0 z-10 flex items-center justify-between border-b bg-surface-white px-3 py-2.5 sm:px-5"
-		>
-			<Breadcrumbs
-				class="h-7"
-				:items="[{ label: __('Courses'), route: { name: 'Courses' } }]"
-			/>
-			<div class="flex space-x-2 justify-end">
-				<div class="w-40 md:w-44">
-					<FormControl
-						v-if="categories.data?.length"
-						type="select"
-						v-model="currentCategory"
-						:options="categories.data"
-						:placeholder="__('Category')"
-					/>
+		<header class="sticky top-0 z-10 flex flex-col border-b bg-surface-white px-3 py-2.5 sm:px-5">
+			<div class="flex items-center justify-between">
+				<Breadcrumbs class="h-7" :items="[{ label: __('Courses'), route: { name: 'Courses' } }]" />
+				<div class="flex space-x-2 justify-end">
+					<div class="w-40 md:w-44" v-if="!showForm">
+						<FormControl v-if="categories.data?.length" type="select" v-model="currentCategory"
+							:options="categories.data" :placeholder="__('Category')" />
+					</div>
+					<div class="w-28 md:w-36" v-if="!showForm">
+						<FormControl type="text" placeholder="Search" v-model="searchQuery" @input="courses.reload()">
+							<template #prefix>
+								<Search class="w-4 h-4 stroke-1.5 text-ink-gray-5" name="search" />
+							</template>
+						</FormControl>
+					</div>
+					<div class="w-10 md:w-10">
+						<Button @click="() => (showForm = !showForm)">
+							<template #icon>
+								<Filter v-if="!showForm" class="h-5 w-5 stroke-2" />
+								<X v-else class="h-5 w-5 stroke-2" />
+							</template>
+						</Button>
+					</div>
+					<router-link v-if="user.data?.is_moderator || user.data?.is_instructor" :to="{
+						name: 'CourseForm',
+						params: { courseName: 'new' },
+					}">
+						<Button variant="solid">
+							<template #prefix>
+								<Plus class="h-4 w-4" />
+							</template>
+							{{ __('New') }}
+						</Button>
+					</router-link>
 				</div>
+			</div>
+			<!-- FORM SEARCH-->
+			<div v-if="showForm" class="flex flex-row space-x-4 my-4 items-center">
 				<div class="w-28 md:w-36">
-					<FormControl
-						type="text"
-						placeholder="Search"
-						v-model="searchQuery"
-						@input="courses.reload()"
-					>
+					<FormControl type="text" placeholder="Search" v-model="searchQuery" @input="courses.reload()">
 						<template #prefix>
-							<Search
-								class="w-4 h-4 stroke-1.5 text-ink-gray-5"
-								name="search"
-							/>
+							<Search class="w-4 h-4 stroke-1.5 text-ink-gray-5" name="search" />
 						</template>
 					</FormControl>
 				</div>
-				<router-link
-					v-if="user.data?.is_moderator || user.data?.is_instructor"
-					:to="{
-						name: 'CourseForm',
-						params: {
-							courseName: 'new',
-						},
-					}"
-				>
-					<Button variant="solid">
-						<template #prefix>
-							<Plus class="h-4 w-4" />
-						</template>
-						{{ __('New') }}
-					</Button>
-				</router-link>
+				<div class="w-40 md:w-44">
+					<FormControl v-if="categories.data?.length" type="select" v-model="currentCategory"
+						:options="categories.data" :placeholder="__('Category')" />
+				</div>
+				<div class="w-40 md:w-44">
+					<FormControl type="select" :options="instructor_types.data" :placeholder="__('Instructor Type')"
+						v-model="selected_instructor_types" />
+				</div>
+				<div class="w-40 md:w-44">
+					<FormControl type="select" :options="course_types.data" :placeholder="__('Course Type')"
+						v-model="selected_course_types" />
+				</div>
+				<div class="w-80 md:w-80">
+					<FormControl type="text" placeholder="Enter training objective" v-model="training_objective_query">
+					</FormControl>
+				</div>
+				<div class="w-28 md:w-36">
+					<FormControl v-model="published_on_query" :label="__('Published On')" type="date" @change="handleDateChange"
+					class="mb-5" />
+				</div>
 			</div>
 		</header>
+
 		<div class="">
-			<Tabs
-				v-if="hasCourses"
-				as="div"
-				v-model="tabIndex"
-				tablistClass="overflow-x-visible flex-wrap !gap-3 md:flex-nowrap"
-				:tabs="makeTabs"
-			>
+			<Tabs v-if="hasCourses" as="div" v-model="tabIndex"
+				tablistClass="overflow-x-visible flex-wrap !gap-3 md:flex-nowrap" :tabs="makeTabs">
 				<template #tab="{ tab, selected }">
 					<div>
 						<button
 							class="group -mb-px flex items-center gap-2 overflow-hidden border-b border-transparent py-2.5 text-base text-ink-gray-5 duration-300 ease-in-out hover:border-outline-gray-3 hover:text-ink-gray-9"
-							:class="{ 'text-ink-gray-9': selected }"
-						>
+							:class="{ 'text-ink-gray-9': selected }">
 							<component v-if="tab.icon" :is="tab.icon" class="h-5" />
 							{{ __(tab.label) }}
 							<Badge theme="gray">
@@ -73,37 +85,31 @@
 					</div>
 				</template>
 				<template #tab-panel="{ tab }">
-					<div
-						v-if="tab.courses && tab.courses.value.length"
-						class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-7 my-5 mx-5"
-					>
-						<router-link
-							v-for="course in tab.courses.value"
-							:to="
-								course.membership && course.current_lesson
-									? {
-											name: 'Lesson',
-											params: {
-												courseName: course.name,
-												chapterNumber: course.current_lesson.split('-')[0],
-												lessonNumber: course.current_lesson.split('-')[1],
-											},
-									  }
-									: course.membership
-									? {
-											name: 'Lesson',
-											params: {
-												courseName: course.name,
-												chapterNumber: 1,
-												lessonNumber: 1,
-											},
-									  }
-									: {
-											name: 'CourseDetail',
-											params: { courseName: course.name },
-									  }
-							"
-						>
+					<div v-if="tab.courses && tab.courses.value.length"
+						class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-7 my-5 mx-5">
+						<router-link v-for="course in tab.courses.value" :to="course.membership && course.current_lesson
+							? {
+								name: 'Lesson',
+								params: {
+									courseName: course.name,
+									chapterNumber: course.current_lesson.split('-')[0],
+									lessonNumber: course.current_lesson.split('-')[1],
+								},
+							}
+							: course.membership
+								? {
+									name: 'Lesson',
+									params: {
+										courseName: course.name,
+										chapterNumber: 1,
+										lessonNumber: 1,
+									},
+								}
+								: {
+									name: 'CourseDetail',
+									params: { courseName: course.name },
+								}
+							">
 							<CourseCard :course="course" />
 						</router-link>
 					</div>
@@ -112,26 +118,19 @@
 					</div>
 				</template>
 			</Tabs>
-			<div
-				v-else-if="
-					!courses.loading &&
-					(user.data?.is_moderator || user.data?.is_instructor)
-				"
-				class="grid grid-cols-3 p-5"
-			>
-				<router-link
-					:to="{
-						name: 'CourseForm',
-						params: {
-							courseName: 'new',
-						},
-					}"
-				>
+			<div v-else-if="
+				!courses.loading &&
+				(user.data?.is_moderator || user.data?.is_instructor)
+			" class="grid grid-cols-3 p-5">
+				<router-link :to="{
+					name: 'CourseForm',
+					params: {
+						courseName: 'new',
+					},
+				}">
 					<div class="bg-surface-menu-bar py-32 px-5 rounded-md">
 						<div class="flex flex-col items-center text-center space-y-2">
-							<Plus
-								class="size-10 stroke-1 text-ink-gray-8 p-1 rounded-full border bg-surface-white"
-							/>
+							<Plus class="size-10 stroke-1 text-ink-gray-8 p-1 rounded-full border bg-surface-white" />
 							<div class="font-medium">
 								{{ __('Create a Course') }}
 							</div>
@@ -142,20 +141,14 @@
 					</div>
 				</router-link>
 			</div>
-			<div
-				v-else-if="!courses.loading && !hasCourses"
-				class="text-center p-5 text-ink-gray-5 mt-52 w-3/4 md:w-1/2 mx-auto space-y-2"
-			>
+			<div v-else-if="!courses.loading && !hasCourses"
+				class="text-center p-5 text-ink-gray-5 mt-52 w-3/4 md:w-1/2 mx-auto space-y-2">
 				<BookOpen class="size-10 mx-auto stroke-1 text-ink-gray-4" />
 				<div class="text-xl font-medium">
 					{{ __('No courses found') }}
 				</div>
 				<div class="leading-5">
-					{{
-						__(
-							'There are no courses available at the moment. Keep an eye out, fresh learning experiences are on the way soon!'
-						)
-					}}
+					{{ __('There are no courses available at the moment!') }}
 				</div>
 			</div>
 		</div>
@@ -167,13 +160,12 @@ import {
 	Badge,
 	Breadcrumbs,
 	Button,
-	call,
 	createResource,
 	FormControl,
 	Tabs,
 } from 'frappe-ui'
 import CourseCard from '@/components/CourseCard.vue'
-import { BookOpen, Plus, Search } from 'lucide-vue-next'
+import { BookOpen, Plus, Search, Filter, X } from 'lucide-vue-next'
 import { ref, computed, inject, onMounted, watch } from 'vue'
 import { updateDocumentTitle } from '@/utils'
 import { useRouter } from 'vue-router'
@@ -181,16 +173,55 @@ import { useSettings } from '@/stores/settings'
 
 const user = inject('$user')
 const searchQuery = ref('')
+const training_objective_query = ref('')
+const published_on_query = ref('')
 const currentCategory = ref(null)
+const selected_instructor_types = ref(null)
+const selected_course_types = ref(null)
 const hasCourses = ref(false)
 const router = useRouter()
 const settings = useSettings()
+const showForm = ref(false)
+
+const instructor_types = ref(getFieldOptionsResource('LMS Course', 'instructor_type'))
+
+const course_types = ref(getFieldOptionsResource('LMS Course', 'course_type'))
+
+function getFieldOptionsResource(doctype, fieldname) {
+	return createResource({
+		url: 'lms.lms.utils.get_field_options',
+		params: {
+			doctype: doctype,
+			fieldname: fieldname,
+		},
+		auto: true,
+		transform(data) {
+			return [{ label: '', value: '' }, ...data]
+		},
+	});
+}
+
+
+
+// watch(selected_instructor_types, (newVal) => {
+// 	course.instructor_type = newVal.value
+// })
+
+// watch(selected_course_types, (newVal) => {
+// 	course.course_type = newVal.value;
+// });
 
 onMounted(() => {
 	checkLearningPath()
 	let queries = new URLSearchParams(location.search)
 	if (queries.has('category')) {
 		currentCategory.value = queries.get('category')
+	}
+	if (queries.has('instructor_type')) {
+		selected_instructor_types.value = queries.get('instructor_type')
+	}
+	if (queries.has('course_type')) {
+		selected_course_types.value = queries.get('course_type')
 	}
 })
 
@@ -202,6 +233,13 @@ const checkLearningPath = () => {
 		router.push({ name: 'Programs' })
 	}
 }
+const handleDateChange = () => {
+   if (!published_on_query.value) {
+      courses.reload();
+   } else {
+      courses.reload();
+   }
+};
 
 const courses = createResource({
 	url: 'lms.lms.utils.get_courses',
@@ -256,9 +294,31 @@ const getCourses = (type) => {
 				course.tags.filter((tag) => tag.toLowerCase().includes(query)).length
 		)
 	}
+	if (training_objective_query.value && currentCategory.value != '') {
+		let query = training_objective_query.value.toLowerCase()
+		courseList = courseList.filter(
+			(course) =>
+			(course.training_objective?.toLowerCase() || '').includes(query)
+		)
+	}
 	if (currentCategory.value && currentCategory.value != '') {
 		courseList = courseList.filter(
 			(course) => course.category == currentCategory.value
+		)
+	}
+	if (published_on_query.value && published_on_query.value != '') {
+		courseList = courseList.filter(
+			(course) => course.published_on == published_on_query.value
+		)
+	}
+	if (selected_instructor_types.value && selected_instructor_types.value != '') {
+		courseList = courseList.filter(
+			(course) => course.instructor_type == selected_instructor_types.value
+		)
+	}
+	if (selected_course_types.value && selected_course_types.value != '') {
+		courseList = courseList.filter(
+			(course) => course.course_type == selected_course_types.value
 		)
 	}
 	return courseList
@@ -295,17 +355,32 @@ watch(courses, () => {
 })
 
 watch(
-	() => currentCategory.value,
+	() => [currentCategory.value, selected_instructor_types.value, selected_course_types.value],
 	() => {
 		let queries = new URLSearchParams(location.search)
+
 		if (currentCategory.value) {
 			queries.set('category', currentCategory.value)
 		} else {
 			queries.delete('category')
 		}
+
+		if (selected_instructor_types.value) {
+			queries.set('instructor_type', selected_instructor_types.value)
+		} else {
+			queries.delete('instructor_type')
+		}
+
+		if (selected_course_types.value) {
+			queries.set('course_type', selected_course_types.value)
+		} else {
+			queries.delete('course_type')
+		}
+
 		history.pushState(null, '', `${location.pathname}?${queries.toString()}`)
 	}
 )
+
 
 const pageMeta = computed(() => {
 	return {

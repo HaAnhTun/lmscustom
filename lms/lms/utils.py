@@ -1023,6 +1023,9 @@ def get_course_details(course):
 			"lessons",
 			"enrollments",
 			"rating",
+			"course_type",
+			"instructor_type",
+			"training_objective",
 		],
 		as_dict=1,
 	)

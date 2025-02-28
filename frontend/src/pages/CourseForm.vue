@@ -31,6 +31,10 @@
 							'A one line introduction to the course that appears on the course card'
 						)
 							" class="mb-4" :required="true" />
+						<FormControl v-model="course.training_objective" :label="__('Training Objective')" :placeholder="__(
+							'What is the objective of this course?'
+						)
+							" class="mb-4"/>
 						<div class="mb-4">
 							<div class="mb-1.5 text-sm text-ink-gray-5">
 								{{ __('Course Description') }}
@@ -101,14 +105,17 @@
 							<Link doctype="LMS Category" v-model="course.category" :label="__('Category')"
 								:onCreate="(value, close) => openSettings(close)" />
 						</div>
+						<div class="w-1/2 mb-4">
+							<FormControl type="autocomplete" :options="instructor_types.data" size="sm" variant="subtle"
+								:disabled="false" label="Instructor Type" v-model="selected_instructor_types" />
+						</div>
+						<div class="w-1/2 mb-4">
+							<FormControl type="autocomplete" :options="course_types.data" size="sm" variant="subtle"
+								:disabled="false" label="Course Type" v-model="selected_course_types" />
+						</div>
 						<div class="mb-4">
 							<MultiSelect v-model="instructors" doctype="User" :label="__('Instructors')"
 								:filters="{ ignore_user_type: 1 }" :required="true" />
-						</div>
-						<div class="mb-4">
-							<FormControl type="autocomplete" :options="instructor_types.data" size="sm" variant="subtle"
-								:disabled="false" label="Instructor Type" 
-								v-model="selected_instructor_types" />
 						</div>
 						<div class="mb-4">
 							<MultiSelect v-model="reqDepartments" doctype="Department"
@@ -144,7 +151,6 @@
 					<div class="container border-t">
 						<div class="text-lg font-semibold mt-5 mb-4">
 							{{ __('Pricing') }}
-							{{ instructor_types.data }}
 						</div>
 						<div class="mb-4">
 							<FormControl type="checkbox" v-model="course.paid_course" :label="__('Paid Course')" />
@@ -170,6 +176,7 @@ import {
 	createResource,
 	FormControl,
 	FileUploader,
+	Badge
 } from 'frappe-ui'
 import {
 	inject,
@@ -183,8 +190,7 @@ import {
 } from 'vue'
 import { showToast, updateDocumentTitle } from '@/utils'
 import Link from '@/components/Controls/Link.vue'
-import Autocomplete from '@/components/Controls/Autocomplete.vue'
-import { Image, Trash2, X } from 'lucide-vue-next'
+import { Image, Trash2,  Filter , X } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 import CourseOutline from '@/components/CourseOutline.vue'
 import MultiSelect from '@/components/Controls/MultiSelect.vue'
@@ -207,14 +213,21 @@ const props = defineProps({
 })
 
 
-const instructor_types = createResource({
-	url: 'lms.lms.utils.get_field_options',
-	params: {
-		doctype: "LMS Course",
-		fieldname: "instructor_type"
-	},
-	auto: true
-})
+const instructor_types = ref(getFieldOptionsResource('LMS Course', 'instructor_type'))
+
+const course_types = ref(getFieldOptionsResource('LMS Course', 'course_type'))
+
+function getFieldOptionsResource(doctype, fieldname) {
+	return createResource({
+		url: 'lms.lms.utils.get_field_options',
+		params: {
+			doctype: doctype,
+			fieldname: fieldname,
+		},
+		auto: true,
+	});
+}
+
 
 const course = reactive({
 	title: '',
@@ -236,12 +249,20 @@ const course = reactive({
 	start_date: '',
 	end_date: '',
 	instructor_type: '',
+	course_type: '',
+	training_objective: '',
 })
 
-const selected_instructor_types = ref({ label: '' , value: '' })
+const selected_instructor_types = ref({ label: '', value: '' })
+const selected_course_types = ref({ label: '', value: '' })
+
 watch(selected_instructor_types, (newVal) => {
 	course.instructor_type = newVal.value
 })
+
+watch(selected_course_types, (newVal) => {
+	course.course_type = newVal.value;
+});
 onMounted(() => {
 	if (
 		props.courseName == 'new' &&
@@ -338,6 +359,9 @@ const courseResource = createResource({
 			} else if (key == 'instructor_type') {
 				selected_instructor_types.label = data.instructor_type;
 				selected_instructor_types.value = data.instructor_type;
+			} else if (key == 'course_type') {
+				selected_course_types.label = data.course_type;
+				selected_course_types.value = data.course_type;
 			} else if (Object.hasOwn(course, key)) course[key] = data[key]
 		})
 		let checkboxes = [
@@ -352,7 +376,7 @@ const courseResource = createResource({
 			let key = checkboxes[idx]
 			course[key] = course[key] ? true : false
 		}
-		
+
 
 		if (data.image) imageResource.reload({ image: data.image })
 		check_permission()
@@ -406,7 +430,6 @@ const submitCourse = () => {
 		})
 	}
 }
-
 
 
 const deleteCourse = createResource({
@@ -528,7 +551,6 @@ const pageMeta = computed(() => {
 		description: 'Create or edit a course for your learning system.',
 	}
 })
-
 
 
 updateDocumentTitle(pageMeta)
