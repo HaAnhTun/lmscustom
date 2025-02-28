@@ -62,9 +62,11 @@
 					</FormControl>
 				</div>
 				<div class="w-28 md:w-36">
-					<FormControl v-model="published_on_query" :label="__('Published On')" type="date" @change="handleDateChange"
-					class="mb-5" />
+					<FormControl v-model="published_on_query" :label="__('Published On')" type="date"
+						@change="handleDateChange" class="mb-5" />
 				</div>
+				<MultiSelect v-model="requested_departments" doctype="Department"
+				:label="__('Requested Departments')" class="mb-5"/>
 			</div>
 		</header>
 
@@ -170,6 +172,7 @@ import { ref, computed, inject, onMounted, watch } from 'vue'
 import { updateDocumentTitle } from '@/utils'
 import { useRouter } from 'vue-router'
 import { useSettings } from '@/stores/settings'
+import MultiSelect from '@/components/Controls/MultiSelect.vue'
 
 const user = inject('$user')
 const searchQuery = ref('')
@@ -182,6 +185,7 @@ const hasCourses = ref(false)
 const router = useRouter()
 const settings = useSettings()
 const showForm = ref(false)
+const requested_departments = ref([])
 
 const instructor_types = ref(getFieldOptionsResource('LMS Course', 'instructor_type'))
 
@@ -234,11 +238,11 @@ const checkLearningPath = () => {
 	}
 }
 const handleDateChange = () => {
-   if (!published_on_query.value) {
-      courses.reload();
-   } else {
-      courses.reload();
-   }
+	if (!published_on_query.value) {
+		courses.reload();
+	} else {
+		courses.reload();
+	}
 };
 
 const courses = createResource({
@@ -298,8 +302,14 @@ const getCourses = (type) => {
 		let query = training_objective_query.value.toLowerCase()
 		courseList = courseList.filter(
 			(course) =>
-			(course.training_objective?.toLowerCase() || '').includes(query)
+				(course.training_objective?.toLowerCase() || '').includes(query)
 		)
+	}
+	if (requested_departments.value && requested_departments.value.length > 0) {
+		courseList = courseList.filter((course) =>
+			course.requested_departments.some(requested_department =>
+				requested_departments.value.some((department) => department == requested_department.department_code))
+		);
 	}
 	if (currentCategory.value && currentCategory.value != '') {
 		courseList = courseList.filter(
