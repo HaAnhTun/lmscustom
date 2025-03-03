@@ -38,7 +38,7 @@
 							:label="__('Short Introduction')"
 							:placeholder="
 								__(
-									'A one line introduction to the course that appears on the course card',
+									'A one line introduction to the course that appears on the course card'
 								)
 							"
 							class="mb-4"
@@ -116,7 +116,7 @@
 							:label="__('Preview Video')"
 							:placeholder="
 								__(
-									'Paste the youtube link of a short video introducing the course',
+									'Paste the youtube link of a short video introducing the course'
 								)
 							"
 							class="mb-4"
@@ -198,7 +198,7 @@
 						<div class="text-lg font-semibold mt-5 mb-4">
 							{{ __('Settings') }}
 						</div>
-						<div class="grid grid-cols-3 gap-10 mb-4">
+						<div class="grid grid-cols-2 gap-10 mb-4">
 							<div
 								v-if="user.data?.is_moderator"
 								class="flex flex-col space-y-4"
@@ -253,27 +253,39 @@
 							</div>
 						</div>
 					</div>
-					<div class="container border-t">
-						<div class="text-lg font-semibold mt-5 mb-4">
-							{{ __('Pricing') }}
+					<div class="container border-t space-y-4">
+						<div class="text-lg font-semibold mt-5">
+							{{ __('Pricing and Certification') }}
 						</div>
-						<div class="mb-4">
+						<div class="grid grid-cols-3">
 							<FormControl
 								type="checkbox"
 								v-model="course.paid_course"
 								:label="__('Paid Course')"
 							/>
+							<FormControl
+								type="checkbox"
+								v-model="course.enable_certification"
+								:label="__('Completion Certificate')"
+							/>
+							<FormControl
+								type="checkbox"
+								v-model="course.paid_certificate"
+								:label="__('Paid Certificate')"
+							/>
 						</div>
-						<FormControl
-							v-model="course.course_price"
-							:label="__('Course Price')"
-							class="mb-4"
-						/>
+						<FormControl v-model="course.course_price" :label="__('Amount')" />
 						<Link
 							doctype="Currency"
 							v-model="course.currency"
 							:filters="{ enabled: 1 }"
 							:label="__('Currency')"
+						/>
+						<Link
+							v-if="course.paid_certificate"
+							doctype="Course Evaluator"
+							v-model="course.evaluator"
+							:label="__('Evaluator')"
 						/>
 					</div>
 				</div>
@@ -354,8 +366,10 @@ const course = reactive({
 	disable_self_learning: false,
 	enable_certification: false,
 	paid_course: false,
+	paid_certificate: false,
 	course_price: '',
 	currency: '',
+	evaluator: '',
 	start_date: '',
 	end_date: '',
 	instructor_type: '',

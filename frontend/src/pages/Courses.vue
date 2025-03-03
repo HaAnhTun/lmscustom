@@ -123,8 +123,9 @@
 					class="mb-5"
 				/>
 			</div>
+			
 		</header>
-
+		
 		<div class="">
 			<Tabs
 				v-if="hasCourses"
@@ -163,20 +164,20 @@
 												chapterNumber: course.current_lesson.split('-')[0],
 												lessonNumber: course.current_lesson.split('-')[1],
 											},
-										}
+									  }
 									: course.membership
-										? {
-												name: 'Lesson',
-												params: {
-													courseName: course.name,
-													chapterNumber: 1,
-													lessonNumber: 1,
-												},
-											}
-										: {
-												name: 'CourseDetail',
-												params: { courseName: course.name },
-											}
+									? {
+											name: 'Lesson',
+											params: {
+												courseName: course.name,
+												chapterNumber: 1,
+												lessonNumber: 1,
+											},
+									  }
+									: {
+											name: 'CourseDetail',
+											params: { courseName: course.name },
+									  }
 							"
 						>
 							<CourseCard :course="course" />
@@ -226,7 +227,11 @@
 					{{ __('No courses found') }}
 				</div>
 				<div class="leading-5">
-					{{ __('There are no courses available at the moment!') }}
+					{{
+						__(
+							'There are no courses available at the moment. Keep an eye out, fresh learning experiences are on the way soon!'
+						)
+					}}
 				</div>
 			</div>
 		</div>
@@ -238,6 +243,7 @@ import {
 	Badge,
 	Breadcrumbs,
 	Button,
+	call,
 	createResource,
 	FormControl,
 	Tabs,
