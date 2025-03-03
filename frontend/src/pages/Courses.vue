@@ -50,22 +50,22 @@
 						:options="categories.data" :placeholder="__('Category')" />
 				</div>
 				<div class="w-40 md:w-44">
-					<FormControl type="select" :options="instructor_types.data" :placeholder="__('Instructor Type')"
-						v-model="selected_instructor_types" />
+					<FormControl type="select" :options="instructorTypes.data" :placeholder="__('Instructor Type')"
+						v-model="selectedInstructorTypes" />
 				</div>
 				<div class="w-40 md:w-44">
-					<FormControl type="select" :options="course_types.data" :placeholder="__('Course Type')"
-						v-model="selected_course_types" />
+					<FormControl type="select" :options="courseTypes.data" :placeholder="__('Course Type')"
+						v-model="selectedCourseTypes" />
 				</div>
 				<div class="w-80 md:w-80">
-					<FormControl type="text" placeholder="Enter training objective" v-model="training_objective_query">
+					<FormControl type="text" placeholder="Enter training objective" v-model="trainingObjectiveQuery">
 					</FormControl>
 				</div>
 				<div class="w-28 md:w-36">
-					<FormControl v-model="published_on_query" :label="__('Published On')" type="date"
+					<FormControl v-model="publishedOnQuery" :label="__('Published On')" type="date"
 						@change="handleDateChange" class="mb-5" />
 				</div>
-				<MultiSelect v-model="requested_departments" doctype="Department"
+				<MultiSelect v-model="requestedDepartments" doctype="Department"
 				:label="__('Requested Departments')" class="mb-5"/>
 			</div>
 		</header>
@@ -176,20 +176,20 @@ import MultiSelect from '@/components/Controls/MultiSelect.vue'
 
 const user = inject('$user')
 const searchQuery = ref('')
-const training_objective_query = ref('')
-const published_on_query = ref('')
+const trainingObjectiveQuery = ref('')
+const publishedOnQuery = ref('')
 const currentCategory = ref(null)
-const selected_instructor_types = ref(null)
-const selected_course_types = ref(null)
+const selectedInstructorTypes = ref(null)
+const selectedCourseTypes = ref(null)
 const hasCourses = ref(false)
 const router = useRouter()
 const settings = useSettings()
 const showForm = ref(false)
-const requested_departments = ref([])
+const requestedDepartments = ref([])
 
-const instructor_types = ref(getFieldOptionsResource('LMS Course', 'instructor_type'))
+const instructorTypes = ref(getFieldOptionsResource('LMS Course', 'instructor_type'))
 
-const course_types = ref(getFieldOptionsResource('LMS Course', 'course_type'))
+const courseTypes = ref(getFieldOptionsResource('LMS Course', 'course_type'))
 
 function getFieldOptionsResource(doctype, fieldname) {
 	return createResource({
@@ -205,16 +205,6 @@ function getFieldOptionsResource(doctype, fieldname) {
 	});
 }
 
-
-
-// watch(selected_instructor_types, (newVal) => {
-// 	course.instructor_type = newVal.value
-// })
-
-// watch(selected_course_types, (newVal) => {
-// 	course.course_type = newVal.value;
-// });
-
 onMounted(() => {
 	checkLearningPath()
 	let queries = new URLSearchParams(location.search)
@@ -222,10 +212,10 @@ onMounted(() => {
 		currentCategory.value = queries.get('category')
 	}
 	if (queries.has('instructor_type')) {
-		selected_instructor_types.value = queries.get('instructor_type')
+		selectedInstructorTypes.value = queries.get('instructor_type')
 	}
 	if (queries.has('course_type')) {
-		selected_course_types.value = queries.get('course_type')
+		selectedCourseTypes.value = queries.get('course_type')
 	}
 })
 
@@ -238,7 +228,7 @@ const checkLearningPath = () => {
 	}
 }
 const handleDateChange = () => {
-	if (!published_on_query.value) {
+	if (!publishedOnQuery.value) {
 		courses.reload();
 	} else {
 		courses.reload();
@@ -298,17 +288,17 @@ const getCourses = (type) => {
 				course.tags.filter((tag) => tag.toLowerCase().includes(query)).length
 		)
 	}
-	if (training_objective_query.value && currentCategory.value != '') {
-		let query = training_objective_query.value.toLowerCase()
+	if (trainingObjectiveQuery.value && trainingObjectiveQuery.value != '') {
+		let query = trainingObjectiveQuery.value.toLowerCase()
 		courseList = courseList.filter(
 			(course) =>
 				(course.training_objective?.toLowerCase() || '').includes(query)
 		)
 	}
-	if (requested_departments.value && requested_departments.value.length > 0) {
+	if (requestedDepartments.value && requestedDepartments.value.length > 0) {
 		courseList = courseList.filter((course) =>
 			course.requested_departments.some(requested_department =>
-				requested_departments.value.some((department) => department == requested_department.department_code))
+				requestedDepartments.value.some((department) => department == requested_department.department_code))
 		);
 	}
 	if (currentCategory.value && currentCategory.value != '') {
@@ -316,19 +306,19 @@ const getCourses = (type) => {
 			(course) => course.category == currentCategory.value
 		)
 	}
-	if (published_on_query.value && published_on_query.value != '') {
+	if (publishedOnQuery.value && publishedOnQuery.value != '') {
 		courseList = courseList.filter(
-			(course) => course.published_on == published_on_query.value
+			(course) => course.published_on == publishedOnQuery.value
 		)
 	}
-	if (selected_instructor_types.value && selected_instructor_types.value != '') {
+	if (selectedInstructorTypes.value && selectedInstructorTypes.value != '') {
 		courseList = courseList.filter(
-			(course) => course.instructor_type == selected_instructor_types.value
+			(course) => course.instructor_type == selectedInstructorTypes.value
 		)
 	}
-	if (selected_course_types.value && selected_course_types.value != '') {
+	if (selectedCourseTypes.value && selectedCourseTypes.value != '') {
 		courseList = courseList.filter(
-			(course) => course.course_type == selected_course_types.value
+			(course) => course.course_type == selectedCourseTypes.value
 		)
 	}
 	return courseList
@@ -365,7 +355,7 @@ watch(courses, () => {
 })
 
 watch(
-	() => [currentCategory.value, selected_instructor_types.value, selected_course_types.value],
+	() => [currentCategory.value, selectedInstructorTypes.value, selectedCourseTypes.value],
 	() => {
 		let queries = new URLSearchParams(location.search)
 
@@ -375,14 +365,14 @@ watch(
 			queries.delete('category')
 		}
 
-		if (selected_instructor_types.value) {
-			queries.set('instructor_type', selected_instructor_types.value)
+		if (selectedInstructorTypes.value) {
+			queries.set('instructor_type', selectedInstructorTypes.value)
 		} else {
 			queries.delete('instructor_type')
 		}
 
-		if (selected_course_types.value) {
-			queries.set('course_type', selected_course_types.value)
+		if (selectedCourseTypes.value) {
+			queries.set('course_type', selectedCourseTypes.value)
 		} else {
 			queries.delete('course_type')
 		}

@@ -4,23 +4,26 @@
   "category": "",
   "chapters": [],
   "course_price": 0.0,
+  "course_type": "Online",
   "currency": "",
   "description": "<p>Khóa học tiếng Nhật N5 <br>nâng cao trình độ tiếng Nhật</p>",
   "disable_self_learning": 0,
   "docstatus": 0,
   "doctype": "LMS Course",
   "enable_certification": 0,
+  "end_date": null,
   "enrollments": "0",
   "expiry": 0,
   "featured": 0,
   "image": "/files/makima.jpg",
+  "instructor_type": "Nội bộ",
   "instructors": [
    {
     "instructor": "Administrator"
    }
   ],
   "lessons": "0",
-  "modified": "2025-02-27 10:42:45.401706",
+  "modified": "2025-03-03 09:00:06.018358",
   "name": "jpn5",
   "paid_course": 0,
   "published": 1,
@@ -33,9 +36,11 @@
    }
   ],
   "short_introduction": "Khóa học tiếng Nhật N5",
+  "start_date": null,
   "status": "Approved",
   "tags": "",
   "title": "JPN5",
+  "training_objective": null,
   "upcoming": 0,
   "video_link": ""
  },
@@ -44,23 +49,26 @@
   "category": "",
   "chapters": [],
   "course_price": 0.0,
+  "course_type": "Online",
   "currency": "",
   "description": "<p>321312 test</p>",
   "disable_self_learning": 0,
   "docstatus": 0,
   "doctype": "LMS Course",
   "enable_certification": 0,
+  "end_date": null,
   "enrollments": "0",
   "expiry": 0,
   "featured": 0,
   "image": "/files/makima.jpg",
+  "instructor_type": "Nội bộ",
   "instructors": [
    {
     "instructor": "Administrator"
    }
   ],
   "lessons": "0",
-  "modified": "2025-02-27 10:42:33.156569",
+  "modified": "2025-03-03 09:00:06.013538",
   "name": "jpn5-2",
   "paid_course": 0,
   "published": 1,
@@ -73,9 +81,11 @@
    }
   ],
   "short_introduction": "Khóa học tiếng Nhật N5",
+  "start_date": null,
   "status": "Approved",
   "tags": "",
   "title": "JPN5",
+  "training_objective": null,
   "upcoming": 0,
   "video_link": ""
  },
@@ -84,16 +94,19 @@
   "category": "",
   "chapters": [],
   "course_price": 0.0,
+  "course_type": "Online",
   "currency": "",
   "description": "<p>4234</p>",
   "disable_self_learning": 0,
   "docstatus": 0,
   "doctype": "LMS Course",
   "enable_certification": 0,
+  "end_date": null,
   "enrollments": "0",
   "expiry": 0,
   "featured": 0,
   "image": "/files/makima.jpg",
+  "instructor_type": "Nội bộ",
   "instructors": [
    {
     "instructor": "Administrator"
@@ -103,7 +116,7 @@
    }
   ],
   "lessons": "0",
-  "modified": "2025-02-27 10:41:55.398636",
+  "modified": "2025-03-03 09:00:06.008383",
   "name": "jpn53",
   "paid_course": 0,
   "published": 1,
@@ -116,9 +129,11 @@
    }
   ],
   "short_introduction": "Khóa học tiếng Nhật N5",
+  "start_date": null,
   "status": "Approved",
   "tags": "",
   "title": "JPN53",
+  "training_objective": null,
   "upcoming": 0,
   "video_link": ""
  },
@@ -127,23 +142,26 @@
   "category": "Business",
   "chapters": [],
   "course_price": 0.0,
+  "course_type": "Online",
   "currency": "",
   "description": "<p>3213</p>",
   "disable_self_learning": 0,
   "docstatus": 0,
   "doctype": "LMS Course",
   "enable_certification": 0,
+  "end_date": null,
   "enrollments": "0",
   "expiry": 0,
   "featured": 0,
   "image": "/files/makima.jpg",
+  "instructor_type": "Nội bộ",
   "instructors": [
    {
     "instructor": "Administrator"
    }
   ],
   "lessons": "0",
-  "modified": "2025-02-27 10:41:44.735973",
+  "modified": "2025-03-03 09:00:06.003090",
   "name": "watch",
   "paid_course": 0,
   "published": 1,
@@ -156,35 +174,40 @@
    }
   ],
   "short_introduction": "3213",
+  "start_date": null,
   "status": "Approved",
   "tags": "",
   "title": "Watch",
+  "training_objective": null,
   "upcoming": 0,
   "video_link": ""
  },
  {
   "amount_usd": 0.0,
-  "category": "",
+  "category": null,
   "chapters": [],
   "course_price": 0.0,
-  "currency": "",
-  "description": "<p>2132</p>",
+  "course_type": "Offline",
+  "currency": "USD",
+  "description": "<div class=\"ql-editor read-mode\"><p>213</p></div>",
   "disable_self_learning": 0,
   "docstatus": 0,
   "doctype": "LMS Course",
   "enable_certification": 0,
+  "end_date": "2025-02-27",
   "enrollments": "0",
   "expiry": 0,
   "featured": 0,
-  "image": "/files/image.png",
+  "image": "/files/R6HA4251.jpg",
+  "instructor_type": "Thuê ngoài",
   "instructors": [
    {
     "instructor": "Administrator"
    }
   ],
   "lessons": "0",
-  "modified": "2025-02-27 10:42:06.071481",
-  "name": "watch-2",
+  "modified": "2025-03-03 09:00:05.991823",
+  "name": "okekoe",
   "paid_course": 0,
   "published": 1,
   "published_on": "2025-02-27",
@@ -195,10 +218,243 @@
     "requested_department": "DEV DN"
    }
   ],
+  "short_introduction": "321",
+  "start_date": "2025-02-27",
+  "status": "Approved",
+  "tags": null,
+  "title": "okekoe",
+  "training_objective": null,
+  "upcoming": 0,
+  "video_link": null
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "",
+  "chapters": [],
+  "course_price": 0.0,
+  "course_type": "Online",
+  "currency": "",
+  "description": "<p>3213</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "end_date": "2025-03-09",
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/R6HA42519dcb78.jpg",
+  "instructor_type": "Thuê ngoài",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-03-03 09:00:05.986118",
+  "name": "3213",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-27",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "REQDEV-00002"
+   }
+  ],
+  "short_introduction": "321",
+  "start_date": "2025-02-28",
+  "status": "Approved",
+  "tags": "",
+  "title": "3213",
+  "training_objective": null,
+  "upcoming": 0,
+  "video_link": ""
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "Business",
+  "chapters": [],
+  "course_price": 0.0,
+  "course_type": "Online",
+  "currency": "",
+  "description": "<p>ok</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "end_date": null,
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/R6HA4244.jpg",
+  "instructor_type": "Nội bộ",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-03-03 09:00:05.981298",
+  "name": "jpn522",
+  "paid_course": 0,
+  "published": 0,
+  "published_on": null,
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "DEV DN"
+   }
+  ],
+  "short_introduction": "Khóa học tiếng Nhật N5",
+  "start_date": null,
+  "status": "In Progress",
+  "tags": "",
+  "title": "JPN522",
+  "training_objective": null,
+  "upcoming": 0,
+  "video_link": ""
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "Business",
+  "chapters": [],
+  "course_price": 0.0,
+  "course_type": "Blended",
+  "currency": "",
+  "description": "<p>321321</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "end_date": "2025-02-19",
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/R6HA4246.jpg",
+  "instructor_type": "Nội bộ",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-03-03 09:00:05.976302",
+  "name": "done",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-06",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "DEV DN"
+   }
+  ],
   "short_introduction": "123",
+  "start_date": "2025-02-01",
+  "status": "Approved",
+  "tags": "",
+  "title": "done ",
+  "training_objective": null,
+  "upcoming": 0,
+  "video_link": "321"
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "Finance",
+  "chapters": [],
+  "course_price": 0.0,
+  "course_type": "Online",
+  "currency": "",
+  "description": "<p>eqwq</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "end_date": "2025-02-27",
+  "enrollments": "0",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/R6HA42519dcb78.jpg",
+  "instructor_type": "Thuê ngoài",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-03-03 09:00:05.970900",
+  "name": "japan-done",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-20",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "DEV6"
+   },
+   {
+    "requested_department": "DEV DN"
+   }
+  ],
+  "short_introduction": "123",
+  "start_date": "2025-02-05",
+  "status": "Approved",
+  "tags": "",
+  "title": "JAPAN DONE",
+  "training_objective": null,
+  "upcoming": 0,
+  "video_link": ""
+ },
+ {
+  "amount_usd": 0.0,
+  "category": "",
+  "chapters": [],
+  "course_price": 0.0,
+  "course_type": "Blended",
+  "currency": "",
+  "description": "<p>2132</p>",
+  "disable_self_learning": 0,
+  "docstatus": 0,
+  "doctype": "LMS Course",
+  "enable_certification": 0,
+  "end_date": "2025-03-24",
+  "enrollments": "1",
+  "expiry": 0,
+  "featured": 0,
+  "image": "/files/R6HA4244.jpg",
+  "instructor_type": "Nội bộ",
+  "instructors": [
+   {
+    "instructor": "Administrator"
+   }
+  ],
+  "lessons": "0",
+  "modified": "2025-03-03 09:47:43.736872",
+  "name": "watch-2",
+  "paid_course": 0,
+  "published": 1,
+  "published_on": "2025-02-27",
+  "rating": "0.0",
+  "related_courses": [],
+  "requested_departments": [
+   {
+    "requested_department": "DEV DN"
+   },
+   {
+    "requested_department": "REQDEV-00001"
+   }
+  ],
+  "short_introduction": "123",
+  "start_date": "2025-03-01",
   "status": "Approved",
   "tags": "",
   "title": "Watch2",
+  "training_objective": "oke đất",
   "upcoming": 0,
   "video_link": "321"
  }

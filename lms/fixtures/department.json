@@ -24,6 +24,14 @@
   "name": "REQDEV-00004"
  },
  {
+  "department_code": "DEV6",
+  "department_name": "DEV 6",
+  "docstatus": 0,
+  "doctype": "Department",
+  "modified": "2025-02-26 13:54:26.594071",
+  "name": "DEV6"
+ },
+ {
   "department_code": "dev8",
   "department_name": "DEV8",
   "docstatus": 0,
@@ -46,13 +54,5 @@
   "doctype": "Department",
   "modified": "2025-02-26 14:29:55.280210",
   "name": "DEV DN"
- },
- {
-  "department_code": "DEV6",
-  "department_name": "DEV 6",
-  "docstatus": 0,
-  "doctype": "Department",
-  "modified": "2025-02-26 13:54:26.594071",
-  "name": "DEV6"
  }
 ]

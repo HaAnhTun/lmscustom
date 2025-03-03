@@ -106,12 +106,12 @@
 								:onCreate="(value, close) => openSettings(close)" />
 						</div>
 						<div class="w-1/2 mb-4">
-							<FormControl type="autocomplete" :options="instructor_types.data" size="sm" variant="subtle"
-								:disabled="false" label="Instructor Type" v-model="selected_instructor_types" />
+							<FormControl type="autocomplete" :options="instructorTypes.data" size="sm" variant="subtle"
+								:disabled="false" label="Instructor Type" v-model="selectedInstructorTypes" />
 						</div>
 						<div class="w-1/2 mb-4">
-							<FormControl type="autocomplete" :options="course_types.data" size="sm" variant="subtle"
-								:disabled="false" label="Course Type" v-model="selected_course_types" />
+							<FormControl type="autocomplete" :options="courseTypes.data" size="sm" variant="subtle"
+								:disabled="false" label="Course Type" v-model="selectedCourseTypes" />
 						</div>
 						<div class="mb-4">
 							<MultiSelect v-model="instructors" doctype="User" :label="__('Instructors')"
@@ -213,20 +213,9 @@ const props = defineProps({
 })
 
 
-const instructor_types = ref(getFieldOptionsResource('LMS Course', 'instructor_type'))
+const instructorTypes = ref(getFieldOptionsResource('LMS Course', 'instructor_type'))
 
-const course_types = ref(getFieldOptionsResource('LMS Course', 'course_type'))
-
-function getFieldOptionsResource(doctype, fieldname) {
-	return createResource({
-		url: 'lms.lms.utils.get_field_options',
-		params: {
-			doctype: doctype,
-			fieldname: fieldname,
-		},
-		auto: true,
-	});
-}
+const courseTypes = ref(getFieldOptionsResource('LMS Course', 'course_type'))
 
 
 const course = reactive({
@@ -253,14 +242,14 @@ const course = reactive({
 	training_objective: '',
 })
 
-const selected_instructor_types = ref({ label: '', value: '' })
-const selected_course_types = ref({ label: '', value: '' })
+const selectedInstructorTypes = ref({ label: '', value: '' })
+const selectedCourseTypes = ref({ label: '', value: '' })
 
-watch(selected_instructor_types, (newVal) => {
+watch(selectedInstructorTypes, (newVal) => {
 	course.instructor_type = newVal.value
 })
 
-watch(selected_course_types, (newVal) => {
+watch(selectedCourseTypes, (newVal) => {
 	course.course_type = newVal.value;
 });
 onMounted(() => {
@@ -294,6 +283,18 @@ const keyboardShortcut = (e) => {
 onBeforeUnmount(() => {
 	window.removeEventListener('keydown', keyboardShortcut)
 })
+
+function getFieldOptionsResource(doctype, fieldname) {
+	return createResource({
+		url: 'lms.lms.utils.get_field_options',
+		params: {
+			doctype: doctype,
+			fieldname: fieldname,
+		},
+		auto: true,
+	});
+}
+
 
 const courseCreationResource = createResource({
 	url: 'frappe.client.insert',
@@ -357,11 +358,11 @@ const courseResource = createResource({
 					reqDepartments.value.push(requested_department.requested_department)
 				})
 			} else if (key == 'instructor_type') {
-				selected_instructor_types.label = data.instructor_type;
-				selected_instructor_types.value = data.instructor_type;
+				selectedInstructorTypes.label = data.instructor_type;
+				selectedInstructorTypes.value = data.instructor_type;
 			} else if (key == 'course_type') {
-				selected_course_types.label = data.course_type;
-				selected_course_types.value = data.course_type;
+				selectedCourseTypes.label = data.course_type;
+				selectedCourseTypes.value = data.course_type;
 			} else if (Object.hasOwn(course, key)) course[key] = data[key]
 		})
 		let checkboxes = [
